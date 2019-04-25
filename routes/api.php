@@ -16,3 +16,18 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// List libraries
+Route::get('libraries', 'LibraryController@index');
+
+// List single library
+Route::get('library/{id}', 'LibraryController@show');
+
+// Create new library
+Route::post('library', 'LibraryController@store');
+
+// Update library
+Route::put('library', 'LibraryController@store');
+
+// Delete library
+Route::delete('library/{id}', 'LibraryController@destroy');
