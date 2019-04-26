@@ -20,6 +20,6 @@ class Author extends Model
 
 		public function libraries()
 		{
-			return $this->belongsToMany('App\Library', 'libraries_authors', 'libraries_id', 'authors_id')->withTimestamps();
+			return $this->belongsToMany('App\Library', 'libraries_authors', 'authors_id', 'libraries_id')->withTimestamps();
 		}
 }
