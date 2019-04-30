@@ -16,10 +16,10 @@ class Library extends JsonResource
     {
         // return parent::toArray($request);
 
-				return [
-						'id' => $this->id,
-						'library_name' => $this->library_name,
-						'address' => $this->address
-				];
+        return [
+            'id' => $this->id,
+            'library_name' => $this->library_name,
+            'address' => $this->address
+        ];
     }
 }
