@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Library;
 use App\Http\Resources\Library as LibraryResource;
 use App\Http\Requests\LibraryRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class LibraryController extends Controller
 {
@@ -69,16 +70,10 @@ class LibraryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Library $library)
     {
-        $library = Library::findOrFail($id);
-
-        $library->library_name = $request->input('library_name');
-        $library->address = $request->input('address');
-
-        if($library->save()){
-          return new LibraryResource($library);
-        }
+        $library->update($request->all());
+        return new LibraryResource($library);
     }
 
     /**
@@ -87,13 +82,9 @@ class LibraryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Library $library)
     {
-        // Get library
-        $library = Library::findOrFail($id);
-
-        if($library->delete()){
-          return new LibraryResource($library);
-        }
+        $library->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

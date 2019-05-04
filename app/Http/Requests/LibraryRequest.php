@@ -24,8 +24,8 @@ class LibraryRequest extends FormRequest
     public function rules()
     {
         return [
-            'library_name' => 'required',
-            'address' => 'required'
+            'library_name' => 'required|string',
+            'address' => 'required|string'
         ];
     }
 }
