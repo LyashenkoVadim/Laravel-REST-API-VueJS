@@ -11,7 +11,7 @@ class Book extends Model
 		protected $fillable = [
 														'id',
 														'book_name',
-														'book_nun_pages',
+														'book_num_pages',
 														'library_id'
 		];
 

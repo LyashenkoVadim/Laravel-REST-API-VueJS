@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Library;
-use App\Http\Resources\Library as LibraryResource;
+use App\Http\Resources\LibraryResource;
 use App\Http\Requests\LibraryRequest;
 use Symfony\Component\HttpFoundation\Response;
 

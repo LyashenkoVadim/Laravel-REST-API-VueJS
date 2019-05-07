@@ -18,3 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/libraries', 'LibraryController');
+Route::group(['prefix'=>'libraries'],function(){
+	Route::apiResource('/{libraries}/books','BookController');
+});
+
+// Route::apiResource('/books', 'BookController');
