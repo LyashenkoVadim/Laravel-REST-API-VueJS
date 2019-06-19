@@ -19,8 +19,8 @@ class LibraryResource extends JsonResource
             'library_name' => $this->library_name,
             'address' => $this->address,
             'href' => [
-                'books' => route('books.index',$this->id)
-            ]
+                'books' => route('books.index', $this->id),
+            ],
         ];
     }
 }

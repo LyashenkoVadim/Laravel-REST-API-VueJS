@@ -48,7 +48,7 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
-        $book = new Book;
+        $book = new Book();
 
         $book->book_name = $request->input('book_name');
         $book->book_num_pages = $request->input('book_num_pages');

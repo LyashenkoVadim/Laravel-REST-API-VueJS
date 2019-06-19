@@ -16,7 +16,7 @@ class LibraryBookController extends Controller
      */
     public function index($library_id)
     {
-        $library = Library::where('id',$library_id)->first();
+        $library = Library::where('id', $library_id)->first();
         return BookResource::collection($library->books);
     }
 
@@ -81,7 +81,7 @@ class LibraryBookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
         //
     }

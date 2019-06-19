@@ -25,7 +25,7 @@ class LibraryRequest extends FormRequest
     {
         return [
             'library_name' => 'required|string',
-            'address' => 'required|string'
+            'address' => 'required|string',
         ];
     }
 }

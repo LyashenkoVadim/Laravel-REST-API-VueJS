@@ -25,7 +25,7 @@ class BookRequest extends FormRequest
     {
         return [
             'book_name' => 'required|string',
-            'book_num_pages' => 'required|integer'
+            'book_num_pages' => 'required|integer',
         ];
     }
 }

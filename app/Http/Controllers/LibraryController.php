@@ -38,7 +38,7 @@ class LibraryController extends Controller
      */
     public function store(LibraryRequest $request)
     {
-        $library = new Library;
+        $library = new Library();
 
         $library->library_name = $request->input('library_name');
         $library->address = $request->input('address');
