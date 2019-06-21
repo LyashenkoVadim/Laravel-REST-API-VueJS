@@ -9,7 +9,7 @@ use App\Http\Resources\BookResource;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
-{   
+{
 
     public function __construct()
     {
@@ -25,7 +25,7 @@ class BookController extends Controller
     {
         // Get books
         $books = Book::paginate(15);
-        
+
         // Return collection of libraries as resource
         return BookResource::collection($books);
     }
@@ -55,7 +55,7 @@ class BookController extends Controller
         $book->library_id = $request->input('library_id');
 
         if($book->save()){
-          return new BookResource($book);
+            return new BookResource($book);
         }
     }
 

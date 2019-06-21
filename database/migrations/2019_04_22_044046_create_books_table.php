@@ -15,9 +15,9 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
-						$table->string('book_name')->nullable();
-						$table->integer('book_num_pages')->unsigned()->nullable();
-						$table->bigInteger('library_id')->unsigned()->nullable();
+            $table->string('book_name')->nullable();
+            $table->integer('book_num_pages')->unsigned()->nullable();
+            $table->bigInteger('library_id')->unsigned()->nullable();
             $table->foreign('library_id')->references('id')->on('libraries');
             $table->timestamps();
         });

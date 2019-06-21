@@ -15,8 +15,8 @@ class CreateLibrariesTable extends Migration
     {
         Schema::create('libraries', function (Blueprint $table) {
             $table->bigIncrements('id');
-						$table->string('library_name')->nullable();
-						$table->string('address')->nullable();
+            $table->string('library_name')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

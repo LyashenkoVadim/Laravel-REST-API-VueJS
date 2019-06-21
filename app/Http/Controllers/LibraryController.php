@@ -25,7 +25,7 @@ class LibraryController extends Controller
     {
         // Get libraries
         $libraries = Library::paginate(15);
-        
+
         // Return collection of libraries as resource
         return LibraryResource::collection($libraries);
     }
@@ -44,7 +44,7 @@ class LibraryController extends Controller
         $library->address = $request->input('address');
 
         if($library->save()){
-          return new LibraryResource($library);
+            return new LibraryResource($library);
         }
     }
 

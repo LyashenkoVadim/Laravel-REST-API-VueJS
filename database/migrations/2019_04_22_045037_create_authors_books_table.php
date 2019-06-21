@@ -15,15 +15,10 @@ class CreateAuthorsBooksTable extends Migration
     {
         Schema::create('authors_books', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-						$table->bigInteger('authors_id')->unsigned()->nullable();
-						$table->foreign('authors_id')->references('id')
-						->on('authors')->onDelete('cascade');
-
-						$table->bigInteger('books_id')->unsigned()->nullable();
-						$table->foreign('books_id')->references('id')
-						->on('books')->onDelete('cascade');
-
+            $table->bigInteger('authors_id')->unsigned()->nullable();
+            $table->foreign('authors_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->bigInteger('books_id')->unsigned()->nullable();
+            $table->foreign('books_id')->references('id')->on('books')->onDelete('cascade');
             $table->timestamps();
         });
     }

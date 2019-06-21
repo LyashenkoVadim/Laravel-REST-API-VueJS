@@ -15,13 +15,10 @@ class CreateLibrariesAuthorsTable extends Migration
     {
         Schema::create('libraries_authors', function (Blueprint $table) {
             $table->bigIncrements('id');
-						$table->bigInteger('libraries_id')->unsigned()->nullable();
-						$table->foreign('libraries_id')->references('id')
-						->on('libraries')->onDelete('cascade');
-
-						$table->bigInteger('authors_id')->unsigned()->nullable();
-						$table->foreign('authors_id')->references('id')
-						->on('authors')->onDelete('cascade');
+            $table->bigInteger('libraries_id')->unsigned()->nullable();
+            $table->foreign('libraries_id')->references('id')->on('libraries')->onDelete('cascade');
+            $table->bigInteger('authors_id')->unsigned()->nullable();
+            $table->foreign('authors_id')->references('id')->on('authors')->onDelete('cascade');
             $table->timestamps();
         });
     }

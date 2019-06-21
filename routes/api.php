@@ -19,9 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('/libraries', 'LibraryController');
 Route::group(['prefix'=>'libraries'], function(){
-  Route::apiResource('/{libraries}/books', 'LibraryBookController', [
-      'as' => 'libraries',
-  ]);
+    Route::apiResource('/{libraries}/books', 'LibraryBookController', [
+        'as' => 'libraries',
+    ]);
 });
 
 Route::apiResource('/books', 'BookController');
