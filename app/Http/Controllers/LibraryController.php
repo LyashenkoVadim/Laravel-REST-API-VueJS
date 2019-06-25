@@ -42,10 +42,10 @@ class LibraryController extends Controller
 
         $library->library_name = $request->input('library_name');
         $library->address = $request->input('address');
-
-        if($library->save()){
-            return new LibraryResource($library);
-        }
+        $library->save();
+        // if(){
+        //     return new LibraryResource($library);
+        // }
     }
 
     /**
