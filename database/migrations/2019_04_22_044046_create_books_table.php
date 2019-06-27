@@ -18,7 +18,7 @@ class CreateBooksTable extends Migration
             $table->string('book_name')->nullable();
             $table->integer('book_num_pages')->unsigned()->nullable();
             $table->bigInteger('library_id')->unsigned()->nullable();
-            $table->foreign('library_id')->references('id')->on('libraries');
+            $table->foreign('library_id')->references('id')->on('libraries')->onDelete('cascade');
             $table->timestamps();
         });
     }
