@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Author;
+use App\Library;
 
 class AuthorsTableSeeder extends Seeder
 {
@@ -12,20 +13,14 @@ class AuthorsTableSeeder extends Seeder
      */
     public function run()
     {
-        Author::create([
-            'author_name' => 'Автор 1'
-        ]);
+        $authors = factory(Author::class, 4000)->create();
 
-        Author::create([
-            'author_name' => 'Автор 2'
-        ]);
+        $libraries = Library::all();
 
-        Author::create([
-            'author_name' => 'Автор 3'
-        ]);
-
-        Author::create([
-            'author_name' => 'Автор 4'
-        ]);
+        Author::all()->each(function ($author) use ($libraries) {
+            $author->libraries()->attach(
+                $libraries->random(rand(1, 6))->pluck('id')->toArray()
+            );
+        });
     }
 }

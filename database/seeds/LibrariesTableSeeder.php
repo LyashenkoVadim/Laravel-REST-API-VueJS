@@ -12,19 +12,6 @@ class LibrariesTableSeeder extends Seeder
      */
     public function run()
     {
-        Library::create([
-            'library_name' => 'Библиотека 1',
-            'address' => 'Адрес Библиотеки 1'
-        ]);
-
-        Library::create([
-            'library_name' => 'Библиотека 2',
-            'address' => 'Адрес Библиотеки 2'
-        ]);
-
-        Library::create([
-            'library_name' => 'Библиотека 3',
-            'address' => 'Адрес Библиотеки 3'
-        ]);
+        $libraries = factory(Library::class, 50)->create();
     }
 }

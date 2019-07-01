@@ -17,11 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Libraries routes
 Route::apiResource('/libraries', 'LibraryController');
+
 Route::group(['prefix'=>'libraries'], function(){
     Route::apiResource('/{libraries}/books', 'LibraryBookController', [
         'as' => 'libraries',
     ]);
 });
 
+// Books routes
 Route::apiResource('/books', 'BookController');
