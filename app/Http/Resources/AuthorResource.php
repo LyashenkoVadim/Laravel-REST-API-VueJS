@@ -17,6 +17,10 @@ class AuthorResource extends JsonResource
         return [
             'id' => $this->id,
             'author_name' => $this->author_name,
+            'href' => [
+                'libraries' => route('authors.libraries', $this->id),
+                'books' => route('authors.books', $this->id),
+            ],
         ];
     }
 }

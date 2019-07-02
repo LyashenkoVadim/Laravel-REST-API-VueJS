@@ -29,13 +29,46 @@ Route::apiResource('/libraries', 'LibraryController');
 Route::get(
     'libraries/{library}/books',
     [
-        'uses' => 'RelationshipController@index',
-        'as' => 'libraries.book',
+        'uses' => 'RelationshipController@libraries_books',
+        'as' => 'libraries.books',
+    ]
+);
+
+Route::get(
+    'libraries/{library}/authors',
+    [
+        'uses' => 'RelationshipController@libraries_authors',
+        'as' => 'libraries.authors',
     ]
 );
 
 // Books routes
 Route::apiResource('/books', 'BookController');
 
+Route::get(
+    'books/{book}/authors',
+    [
+        'uses' => 'RelationshipController@books_authors',
+        'as' => 'books.authors',
+    ]
+);
+
+
 // Authors routes
 Route::apiResource('/authors', 'AuthorController');
+
+Route::get(
+    'authors/{author}/libraries',
+    [
+        'uses' => 'RelationshipController@authors_libraries',
+        'as' => 'authors.libraries',
+    ]
+);
+
+Route::get(
+    'authors/{author}/books',
+    [
+        'uses' => 'RelationshipController@authors_books',
+        'as' => 'authors.books',
+    ]
+);

@@ -19,6 +19,9 @@ class BookResource extends JsonResource
             'book_name' => $this->book_name,
             'book_num_pages' => $this->book_num_pages,
             'library_id' => $this->library_id,
+            'href' => [
+                'authors' => route('books.authors', $this->id),
+            ],
         ];
     }
 }

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\Author;
 use App\Library;
+use App\Http\Resources\LibraryResource;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\AuthorResource;
 
 class RelationshipController extends Controller
 {
@@ -14,80 +17,40 @@ class RelationshipController extends Controller
     {
         $this->middleware('auth:api')->except('');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Library $library)
+
+    // libraries/{library}/books
+    public function libraries_books(Library $library)
     {
         $books = $library->books()->paginate(15);
         return BookResource::collection($books);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    // libraries/{library}/authors
+    public function libraries_authors(Library $library)
     {
-        //
+        $authors = $library->authors()->paginate(15);
+        return AuthorResource::collection($authors);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    // books/{book}/authors
+    public function books_authors(Book $book)
     {
-        //
+        $authors = $book->authors()->paginate(15);
+        return AuthorResource::collection($authors);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    // authors/{author}/libraries
+    public function authors_libraries(Author $author)
     {
-        //
+        $libraries = $author->libraries()->paginate(15);
+        return LibraryResource::collection($libraries);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    // authors/{author}/books
+    public function authors_books(Author $author)
     {
-        //
+        $books = $author->books()->paginate(15);
+        return BookResource::collection($books);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy()
-    {
-        //
-    }
 }
