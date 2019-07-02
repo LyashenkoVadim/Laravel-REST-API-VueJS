@@ -7,7 +7,7 @@ use App\Book;
 use App\Library;
 use App\Http\Resources\BookResource;
 
-class LibraryBookController extends Controller
+class RelationshipController extends Controller
 {
 
     public function __construct()
@@ -19,10 +19,10 @@ class LibraryBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($library_id)
+    public function index(Library $library)
     {
-        $library = Library::where('id', $library_id)->first();
-        return BookResource::collection($library->books);
+        $books = $library->books()->paginate(15);
+        return BookResource::collection($books);
     }
 
     /**

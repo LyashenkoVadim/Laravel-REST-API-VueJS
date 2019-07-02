@@ -16,26 +16,12 @@ class LibraryController extends Controller
         $this->middleware('auth:api')->except('');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        // Get libraries
         $libraries = Library::paginate(15);
-
-        // Return collection of libraries as resource
         return LibraryResource::collection($libraries);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(LibraryRequest $request)
     {
         $library = new Library();
@@ -48,40 +34,18 @@ class LibraryController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        // Get library
         $library = Library::findOrFail($id);
-
-        // Return single library as a resource
         return new LibraryResource($library);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Library $library)
     {
         $library->update($request->all());
         return new LibraryResource($library);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Library $library)
     {
         $library->delete();

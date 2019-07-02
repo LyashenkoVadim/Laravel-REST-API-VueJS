@@ -20,11 +20,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Libraries routes
 Route::apiResource('/libraries', 'LibraryController');
 
-Route::group(['prefix'=>'libraries'], function(){
-    Route::apiResource('/{libraries}/books', 'LibraryBookController', [
-        'as' => 'libraries',
-    ]);
-});
+// Route::group(['prefix'=>'libraries'], function(){
+//     Route::apiResource('/{libraries}/books', 'LibraryBookController', [
+//         'as' => 'libraries',
+//     ]);
+// });
+
+Route::get(
+    'libraries/{library}/books',
+    [
+        'uses' => 'RelationshipController@index',
+        'as' => 'libraries.book',
+    ]
+);
 
 // Books routes
 Route::apiResource('/books', 'BookController');
+
+// Authors routes
+Route::apiResource('/authors', 'AuthorController');
