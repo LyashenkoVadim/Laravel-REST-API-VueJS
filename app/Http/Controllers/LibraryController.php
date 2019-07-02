@@ -40,7 +40,7 @@ class LibraryController extends Controller
         return new LibraryResource($library);
     }
 
-    public function update(Request $request, Library $library)
+    public function update(LibraryRequest $request, Library $library)
     {
         $library->update($request->all());
         return new LibraryResource($library);

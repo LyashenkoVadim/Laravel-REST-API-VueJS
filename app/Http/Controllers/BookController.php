@@ -41,7 +41,7 @@ class BookController extends Controller
         return new BookResource($book);
     }
 
-    public function update(Request $request, Book $book)
+    public function update(BookRequest $request, Book $book)
     {
         $book->update($request->all());
         return new BookResource($book);

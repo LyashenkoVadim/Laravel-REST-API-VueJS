@@ -38,13 +38,13 @@ class AuthorController extends Controller
         return new AuthorResource($author);
     }
 
-    public function update(Request $request, Author $author)
+    public function update(AuthorRequest $request, Author $author)
     {
         $author->update($request->all());
         return new AuthorResource($author);
     }
 
-    public function destroy($id)
+    public function destroy(Author $author)
     {
         $author->delete();
         return response(null, Response::HTTP_NO_CONTENT);
