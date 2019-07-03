@@ -18,7 +18,7 @@ class LibraryController extends Controller
 
     public function index()
     {
-        $libraries = Library::paginate(15);
+        $libraries = Library::paginate(4);
         return LibraryResource::collection($libraries);
     }
 

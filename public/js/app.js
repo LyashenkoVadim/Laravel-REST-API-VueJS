@@ -1801,22 +1801,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      libraries: []
+      libraries: [],
+      pagination: {}
     };
   },
   mounted: function mounted() {
     var app = this;
     axios.get('/api/libraries').then(function (resp) {
-      app.libraries = resp.data;
+      app.libraries = resp.data.data;
+      app.pagination = {
+        current_page: resp.data.meta.current_page,
+        from_page: resp.data.meta.from,
+        last_page: resp.data.meta.last_page,
+        path_page: resp.data.meta.path,
+        per_page: resp.data.meta.per_page,
+        to_page: resp.data.meta.to,
+        total_page: resp.data.meta.total,
+        first_link: resp.data.links.first,
+        last_link: resp.data.links.last,
+        prev_link: resp.data.links.prev,
+        next_link: resp.data.links.next
+      };
     })["catch"](function (resp) {
       console.log(resp);
       alert("Could not load libraries");
     });
   },
   methods: {
+    viewLibraries: function viewLibraries(pagi) {
+      var _this = this;
+
+      pagi = pagi || '/api/libraries';
+      fetch(pagi).then(function (resp) {
+        return resp.json();
+      }).then(function (resp) {
+        _this.libraries = resp.data;
+        _this.pagination = {
+          current_page: resp.meta.current_page,
+          from_page: resp.meta.from,
+          last_page: resp.meta.last_page,
+          path_page: resp.meta.path,
+          per_page: resp.meta.per_page,
+          to_page: resp.meta.to,
+          total_page: resp.meta.total,
+          first_link: resp.links.first,
+          last_link: resp.links.last,
+          prev_link: resp.links.prev,
+          next_link: resp.links.next
+        };
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
     deleteEntry: function deleteEntry(id, index) {
       if (confirm("Do you really want to delete it?")) {
         var app = this;
@@ -37157,7 +37213,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.libraries.data, function(library, index) {
+            _vm._l(_vm.libraries, function(library, index) {
               return _c("tr", { key: library.id }, [
                 _c("td", [_vm._v(_vm._s(library.library_name))]),
                 _vm._v(" "),
@@ -37210,6 +37266,151 @@ var render = function() {
           )
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mt-2" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("nav", [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            [
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: { disabled: !_vm.pagination.first_link }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.viewLibraries(_vm.pagination.first_link)
+                        }
+                      }
+                    },
+                    [_vm._v("«")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: { disabled: !_vm.pagination.prev_link }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.viewLibraries(_vm.pagination.prev_link)
+                        }
+                      }
+                    },
+                    [_vm._v("<")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.pagination.last_page, function(n) {
+                return _c(
+                  "li",
+                  {
+                    key: n.current_page,
+                    staticClass: "page-item",
+                    class: { active: _vm.pagination.current_page == n }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.viewLibraries(
+                              _vm.pagination.path_page + "?page=" + n
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(n))]
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: { disabled: !_vm.pagination.next_link }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.viewLibraries(_vm.pagination.next_link)
+                        }
+                      }
+                    },
+                    [_vm._v(">")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: { disabled: !_vm.pagination.last_link }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.viewLibraries(_vm.pagination.last_link)
+                        }
+                      }
+                    },
+                    [_vm._v("»")]
+                  )
+                ]
+              )
+            ],
+            2
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _vm._v(
+        "\n        Page: " +
+          _vm._s(_vm.pagination.from_page) +
+          " - " +
+          _vm._s(_vm.pagination.to_page) +
+          "\n        Total: " +
+          _vm._s(_vm.pagination.total_page) +
+          "\n    "
+      )
     ])
   ])
 }
