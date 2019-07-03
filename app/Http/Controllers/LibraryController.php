@@ -13,7 +13,7 @@ class LibraryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api')->except('');
+        // $this->middleware('auth:api')->except('');
     }
 
     public function index()
@@ -50,5 +50,10 @@ class LibraryController extends Controller
     {
         $library->delete();
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function view()
+    {
+        return view('admin.libraries.index');
     }
 }

@@ -1,23 +1,21 @@
-<template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+<template id="my">
+    <div id="app">
+        {{ libraries }}
     </div>
 </template>
 
+
 <script>
     export default {
+        data(){
+            return {
+                libraries: null
+            };
+        },
         mounted() {
-            console.log('Component mounted.')
+            axios
+            .get('http://laravel-rest-api-vuejs/api/libraries')
+            .then(response => (this.libraries = response));
         }
     }
 </script>
