@@ -19,7 +19,7 @@
                     <td>{{ library.library_name }}</td>
                     <td>{{ library.address }}</td>
                     <td>
-                        <router-link :to="{name: 'editLibrary', params: {id: library.id}}" class="btn btn-xs btn-default">
+                        <router-link :to="{name: 'editLibrary', params: {id: library.id}}" class="btn btn-xs btn-primary">
                             Edit
                         </router-link>
                         <a href="#"

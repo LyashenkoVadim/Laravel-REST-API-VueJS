@@ -37225,7 +37225,7 @@ var render = function() {
                     _c(
                       "router-link",
                       {
-                        staticClass: "btn btn-xs btn-default",
+                        staticClass: "btn btn-xs btn-primary",
                         attrs: {
                           to: {
                             name: "editLibrary",
