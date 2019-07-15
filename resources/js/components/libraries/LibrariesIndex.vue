@@ -25,7 +25,7 @@
                         <a href="#"
                             class="btn btn-xs btn-danger"
                             v-on:click="deleteEntry(library.id, index)">
-                            Delete
+                            &times;
                         </a>
                     </td>
                 </tr>

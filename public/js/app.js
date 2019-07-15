@@ -37253,7 +37253,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        Delete\n                    "
+                          "\n                        ×\n                    "
                         )
                       ]
                     )
