@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
+
+Route::post('/login', 'AuthController@login')->name('login');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 // 'middleware' => ['auth']
