@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-// 'middleware' => ['auth']
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::get('libraries', 'LibraryController@view')->name('libraries.index');
 });
