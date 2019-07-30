@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
-    public function login(Request $reguest){
+    public function login(Request $request){
 
         $http = new \GuzzleHttp\Client;
 
@@ -30,5 +33,27 @@ class AuthController extends Controller
             return response()->json('Something went wrong on the server.', $e->getCode());
         }
 
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:3',
+        ]);
+        return User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+        return response()->json('Logged out successfully', 200);
     }
 }
