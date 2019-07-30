@@ -27,8 +27,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Libraries</div>
                         <div class="panel-body table-responsive">
-                            <router-view name="LibrariesIndex"></router-view>
-                            <router-view></router-view>
+                            {{-- <router-view name="LibrariesIndex"></router-view>
+                            <router-view></router-view> --}}
                         </div>
                     </div>
                 </div>

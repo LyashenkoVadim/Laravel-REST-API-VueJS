@@ -84,7 +84,7 @@
                 @endif --}}
 
                 <div class="content">
-                    <router-view name="Login"></router-view>
+                    {{-- <router-view name="Login"></router-view> --}}
                     <router-view></router-view>
                 </div>
             </div>

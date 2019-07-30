@@ -14,13 +14,15 @@ import LibrariesCreate from './components/libraries/LibrariesCreate.vue';
 import LibrariesEdit from './components/libraries/LibrariesEdit.vue';
 
 const routes = [
-    {
-        path: '/',
-        components: {
-            Login: Login,
-            LibrariesIndex: LibrariesIndex
-        }
-    },
+    // {
+    //     path: '/',
+    //     components: {
+    //         Login: Login,
+    //         LibrariesIndex: LibrariesIndex
+    //     }
+    // },
+    {path: '/login', component: Login, name: 'login'},
+    {path: '/admin/libraries', component: LibrariesIndex, name: 'librariesIndex'},
     {path: '/admin/libraries/create', component: LibrariesCreate, name: 'createLibrary'},
     {path: '/admin/libraries/edit/:id', component: LibrariesEdit, name: 'editLibrary'},
 ]

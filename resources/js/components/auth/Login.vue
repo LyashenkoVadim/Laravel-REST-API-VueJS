@@ -37,7 +37,7 @@
                 password: this.password,
             })
                 .then(response => {
-                    // this.$router.push({ name: 'todo' })
+                    this.$router.push( { name: 'librariesIndex' } )
                 })
             }
         }
