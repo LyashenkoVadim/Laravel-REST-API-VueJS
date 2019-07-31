@@ -1876,7 +1876,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    loggedIn: function loggedIn() {
+      return this.$store.getters.loggedIn;
+    }
+  },
   data: function data() {
     return {
       libraries: [],
@@ -1885,7 +1892,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var app = this;
-    axios.get('/api/libraries').then(function (resp) {
+    axios.get('/api/libraries', {
+      'headers': {
+        'Authorization': 'Bearer ' + this.$store.state.token
+      }
+    }).then(function (resp) {
       app.libraries = resp.data.data;
       app.pagination = {
         current_page: resp.data.meta.current_page,
@@ -37375,6 +37386,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.loggedIn ? _c("h1", [_vm._v("Logged!")]) : _vm._e(),
+    _vm._v(" "),
+    !_vm.loggedIn ? _c("h1", [_vm._v("unLogged!")]) : _vm._e(),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "form-group" },
@@ -53531,6 +53546,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   state: {
     token: localStorage.getItem('access_token') || null
+  },
+  getters: {
+    loggedIn: function loggedIn(state) {
+      return state.token !== null;
+    }
   },
   mutations: {
     retrieveToken: function retrieveToken(state, token) {

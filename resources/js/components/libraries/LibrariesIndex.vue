@@ -1,5 +1,7 @@
 <template>
     <div>
+        <h1 v-if="loggedIn">Logged!</h1>
+        <h1 v-if="!loggedIn">unLogged!</h1>
         <div class="form-group">
             <router-link :to="{name: 'createLibrary'}" class="btn btn-success">Create new library</router-link>
         </div>
@@ -55,6 +57,11 @@
 
 <script>
     export default {
+        computed: {
+            loggedIn(){
+                return this.$store.getters.loggedIn;
+            }
+        },
         data: function () {
             return {
                 libraries: [],
@@ -63,7 +70,7 @@
         },
         mounted() {
             var app = this;
-            axios.get('/api/libraries')
+            axios.get('/api/libraries', { 'headers': { 'Authorization': 'Bearer ' + this.$store.state.token } })
             .then(function (resp) {
                 app.libraries = resp.data.data;
                 app.pagination = {

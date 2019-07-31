@@ -33,6 +33,11 @@ export const store = new Vuex.Store({
     state: {
         token: localStorage.getItem('access_token') || null,
     },
+    getters: {
+        loggedIn(state) {
+            return state.token !== null
+        },
+    },
     mutations: {
         retrieveToken(state, token) {
             state.token = token
