@@ -13,12 +13,24 @@ class LibraryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api')->except('view');
+        // $this->middleware('auth:api')->except('view');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $libraries = Library::paginate(4);
+        if($request->per_page){
+            if(ctype_digit($request->per_page)){
+                $per_page = (int)$request->per_page;
+                $libraries = Library::paginate($per_page);
+            }
+            else{
+                return response('Error: per_page must be a positive number', Response::HTTP_BAD_REQUEST);
+            }
+        }
+        else{
+            $libraries = Library::paginate(4);
+        }
+
         return LibraryResource::collection($libraries);
     }
 
