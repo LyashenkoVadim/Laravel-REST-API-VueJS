@@ -20,22 +20,8 @@ class LibraryController extends Controller
 
     public function index(Request $request)
     {
-
         $per_page = ApiService::PerPageHandler($request);
-
-        if(is_object($per_page)){
-            return $per_page;
-        }
-
-        if($per_page){
-            $libraries = Library::paginate($per_page);
-        }
-        else{
-            $libraries = Library::paginate(4);
-        }
-
-        return LibraryResource::collection($libraries);
-
+        return ApiService::PaginationHandler($per_page, 4, $class=Library::class, $class=LibraryResource::class);
     }
 
     public function store(LibraryRequest $request)

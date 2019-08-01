@@ -23,5 +23,20 @@ class ApiService
 
     }
 
+    public static function PaginationHandler($per_page, $default, $entity, $resource){
+
+        if(is_object($per_page)){
+            return $per_page;
+        }
+
+        if($per_page){
+            $libraries = $entity::paginate($per_page);
+        }
+        else{
+            $libraries = $entity::paginate($default);
+        }
+
+        return $resource::collection($libraries);
+    }
 
 }

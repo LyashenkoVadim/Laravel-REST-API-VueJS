@@ -8,6 +8,8 @@ use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use Symfony\Component\HttpFoundation\Response;
 
+use App\Services\ApiService;
+
 class BookController extends Controller
 {
 
@@ -16,10 +18,10 @@ class BookController extends Controller
         $this->middleware('auth:api')->except('');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::paginate(15);
-        return BookResource::collection($books);
+        $per_page = ApiService::PerPageHandler($request);
+        return ApiService::PaginationHandler($per_page, 4, $class=Book::class, $class=BookResource::class);
     }
 
     public function store(BookRequest $request)
