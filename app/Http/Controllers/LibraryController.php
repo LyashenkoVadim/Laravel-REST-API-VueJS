@@ -8,6 +8,8 @@ use App\Http\Resources\LibraryResource;
 use App\Http\Requests\LibraryRequest;
 use Symfony\Component\HttpFoundation\Response;
 
+use App\Services\ApiService;
+
 class LibraryController extends Controller
 {
 
@@ -18,20 +20,22 @@ class LibraryController extends Controller
 
     public function index(Request $request)
     {
-        if($request->per_page){
-            if(ctype_digit($request->per_page)){
-                $per_page = (int)$request->per_page;
-                $libraries = Library::paginate($per_page);
-            }
-            else{
-                return response('Error: per_page must be a positive number', Response::HTTP_BAD_REQUEST);
-            }
+
+        $per_page = ApiService::PerPageHandler($request);
+
+        if(is_object($per_page)){
+            return $per_page;
+        }
+
+        if($per_page){
+            $libraries = Library::paginate($per_page);
         }
         else{
             $libraries = Library::paginate(4);
         }
 
         return LibraryResource::collection($libraries);
+
     }
 
     public function store(LibraryRequest $request)
