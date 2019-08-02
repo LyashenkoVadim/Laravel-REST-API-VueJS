@@ -14,7 +14,9 @@ class ApiService
                 return $per_page;
             }
             else{
-                return response('Error: per_page must be a positive number', Response::HTTP_BAD_REQUEST);
+                return response()->json([
+                    'errors' => 'per_page must be a positive number'
+                ],Response::HTTP_BAD_REQUEST);
             }
         }
         else{
