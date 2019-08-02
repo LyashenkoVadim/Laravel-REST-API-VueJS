@@ -32,13 +32,13 @@ class ApiService
         }
 
         if($per_page){
-            $libraries = $entity::paginate($per_page);
+            $entities = $entity::paginate($per_page);
         }
         else{
-            $libraries = $entity::paginate($default);
+            $entities = $entity::paginate($default);
         }
 
-        return $resource::collection($libraries);
+        return $resource::collection($entities);
     }
 
 }
