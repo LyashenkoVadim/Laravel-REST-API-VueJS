@@ -20,8 +20,13 @@ class BookController extends Controller
 
     public function index(Request $request)
     {
+        if($request->sort_by){
+            $books = Book::where($request->except('per_page', 'sort_by'))->orderBy($request->sort_by)->paginate(5);
+        }
+        else{
+            $books = Book::where($request->except('per_page', 'sort_by'))->paginate(5);
+        }
 
-        $books = Book::where($request->except('per_page'))->paginate(4);
         return BookResource::collection($books);
 
         // $per_page = ApiService::PerPageHandler($request);
