@@ -20,11 +20,18 @@ class BookController extends Controller
 
     public function index(Request $request)
     {
-        if($request->sort_by){
-            $books = Book::where($request->except('per_page', 'sort_by'))->orderBy($request->sort_by)->paginate(5);
+        if($request->per_page){
+            $per_page = (int)$request->per_page;
         }
         else{
-            $books = Book::where($request->except('per_page', 'sort_by'))->paginate(5);
+            $per_page = 5;
+        }
+
+        if($request->sort_by){
+            $books = Book::where($request->except('per_page', 'sort_by'))->orderBy($request->sort_by)->paginate($per_page);
+        }
+        else{
+            $books = Book::where($request->except('per_page', 'sort_by'))->paginate($per_page);
         }
 
         return BookResource::collection($books);
