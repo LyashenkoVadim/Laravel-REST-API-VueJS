@@ -36,8 +36,6 @@ class BookController extends Controller
 
         return BookResource::collection($books);
 
-        // $per_page = ApiService::PerPageHandler($request);
-        // return ApiService::PaginationHandler($per_page, 4, $class=Book::class, $class=BookResource::class);
     }
 
     public function store(BookRequest $request)
