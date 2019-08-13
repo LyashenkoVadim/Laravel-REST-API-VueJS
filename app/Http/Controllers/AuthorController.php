@@ -17,7 +17,20 @@ class AuthorController extends Controller
 
     public function index()
     {
-        $authors = Author::paginate(15);
+        if($request->per_page){
+            $per_page = (int)$request->per_page;
+        }
+        else{
+            $per_page = 5;
+        }
+
+        if($request->sort_by){
+            $authors = Author::where($request->except('per_page', 'sort_by'))->orderBy($request->sort_by)->paginate($per_page);
+        }
+        else{
+            $authors = Author::where($request->except('per_page', 'sort_by'))->paginate($per_page);
+        }
+
         return AuthorResource::collection($authors);
     }
 
